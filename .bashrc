@@ -174,6 +174,10 @@ alias gitr='git add . && git commit -m "new commit" && git push' # add, commit, 
 alias gitsync="ls | xargs -P10 -I{} git -C {} pull"
 alias gitr='git add . && git commit -m "new commit" && git push' # add, commit, and push alias 
 
+# Alias for yt-dlp
+alias ytdl='yt-dlp -o "%(title)s.%(ext)s"'
+alias ytdlmp4='yt-dlp -f "bestvideo&#91;ext=mp4]+bestaudio&#91;ext=m4a]/best&#91;ext=mp4]/best" -o "%(title)s.f%(format_id)s.%(ext)s"'
+
 # Changes dir color in terminal or tty (30:black, 31:red, 32:green, 33:yellow, 34:blue, 35:purple, 36:cyan, 37:white)
 # Use di=1;4;33 to make directories (1) bold, (4) underlined, and (33) yellow
 LS_COLORS="di=1;33"
@@ -194,11 +198,34 @@ export PATH=/home/waynes/bin:$PATH
 #neofetch --color_blocks off
 screenfetch
 
+# Powerline
 if [ -f /usr/share/powerline/bindings/bash/powerline.sh ]; then
   powerline-daemon -q
   POWERLINE_BASH_CONTINUATION=1
   POWERLINE_BASH_SELECT=1
   source /usr/share/powerline/bindings/bash/powerline.sh
 fi
+
+# Shell wrapper for yazi
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
+# ls after cd
+function cd {
+    if [ -z "$1" ]; then
+        builtin cd
+    else
+        builtin cd "$1"
+    fi
+    if [ $? -eq 0 ]; then
+        ls
+    fi
+}
 
 xset b off
