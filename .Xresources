@@ -7,14 +7,14 @@
 
 !URxvt*font: xft:terminus:size=16
 !URxvt*font: xft:bitstream vera sans mono:size=14:antialiasing=true
-!URxvt*font: xft:hack:size=16:antialiasing=true
-URxvt*font: xft:Source Code Pro:size=10:hinting=true:antialiasing=true,xft:Consolas:size=10:hinting=true,xft:DejaVu Sans:size=10:hinting=true
+URxvt*font: xft:hack:size=12
+!URxvt*font: xft:Source Code Pro:size=10:hinting=true:antialiasing=true,xft:Consolas:size=10:hinting=true,xft:DejaVu Sans:size=10:hinting=true
 !URxvt*font: xft:Monospace:size=14:antialiasing=true
 !URxvt*font: xft:consolas:size=16:antialiasing=true
 !URxvt*font: xft:roboto:size=16:antialiasing=true
 !URxvt*font: xft:joypixel:size=16:antialiasing=true
-URxvt*boldFont: xft:bitstream vera sans mono:bold:size=12:antialiasing=true
-!URxvt*boldFont: xft:hack:bold:size=16:antialiasing=true
+!URxvt*boldFont: xft:bitstream vera sans mono:bold:size=12:antialiasing=true
+URxvt*boldFont: xft:hack:bold:size=12
 URxvt*letterSpace: 0
 URxvt*lineSpace: 0
 
