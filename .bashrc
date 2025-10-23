@@ -190,8 +190,9 @@ mvg ()
 # Add $HOME/bin to path
 export PATH=/home/waynes/bin:$PATH
 
-screenfetch
+#screenfetch
 #neofetch --colors 129 7 129 129 7 7 --ascii_colors 129 129 --ascii_distro arch --color_blocks off
+fastfetch
 
 # Powerline
 if [ -f /usr/share/powerline/bindings/bash/powerline.sh ]; then
