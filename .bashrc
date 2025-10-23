@@ -96,7 +96,7 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-# NEW!!! Based off of Manjaro. Set color RED for root and a different color for user
+# Based off of Manjaro. Set color RED for root and a different color for user. Place in both users home dir.
 if [[ ${EUID} == 0 ]]; then
 	PS1='\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;31m\]\w\[\033[00m\]\$ '
 else
@@ -170,13 +170,8 @@ alias xit="exit"
 # Alias for Git committing and pushing. gitsync pulls all git in current folder
 alias gitc="git add . && git commit -m" # + commit message
 alias gitp="git push" # + remote & branch names
-alias gitr='git add . && git commit -m "new commit" && git push' # add, commit, and push
 alias gitsync="ls | xargs -P10 -I{} git -C {} pull"
-alias gitr='git add . && git commit -m "new commit" && git push' # add, commit, and push alias 
-
-# Alias for yt-dlp
-alias ytdl='yt-dlp -o "%(title)s.%(ext)s"'
-alias ytdlmp4='yt-dlp -f "bestvideo&#91;ext=mp4]+bestaudio&#91;ext=m4a]/best&#91;ext=mp4]/best" -o "%(title)s.f%(format_id)s.%(ext)s"'
+alias gitr='git add . && git commit -m "new commit" && git push' # add, commit, and push alias
 
 # Changes dir color in terminal or tty (30:black, 31:red, 32:green, 33:yellow, 34:blue, 35:purple, 36:cyan, 37:white)
 # Use di=1;4;33 to make directories (1) bold, (4) underlined, and (33) yellow
@@ -192,11 +187,11 @@ mvg ()
     fi
 }
 
+# Add $HOME/bin to path
 export PATH=/home/waynes/bin:$PATH
 
-#neofetch --colors 129 7 129 129 7 7 --ascii_colors 129 129 --ascii_distro arch --color_blocks off
-#neofetch --color_blocks off
 screenfetch
+#neofetch --colors 129 7 129 129 7 7 --ascii_colors 129 129 --ascii_distro arch --color_blocks off
 
 # Powerline
 if [ -f /usr/share/powerline/bindings/bash/powerline.sh ]; then
@@ -205,16 +200,6 @@ if [ -f /usr/share/powerline/bindings/bash/powerline.sh ]; then
   POWERLINE_BASH_SELECT=1
   source /usr/share/powerline/bindings/bash/powerline.sh
 fi
-
-# Shell wrapper for yazi
-function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	yazi "$@" --cwd-file="$tmp"
-	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		builtin cd -- "$cwd"
-	fi
-	rm -f -- "$tmp"
-}
 
 # ls after cd
 function cd {
@@ -228,4 +213,6 @@ function cd {
     fi
 }
 
-xset b off
+
+# Enable for GUI.
+#xset b off
