@@ -202,6 +202,19 @@ if [ -f /usr/share/powerline/bindings/bash/powerline.sh ]; then
   source /usr/share/powerline/bindings/bash/powerline.sh
 fi
 
+# Ranger shell function wrapper
+ranger() {
+    local tempfile="$(mktemp -t tmp.XXXXXX)"
+    command ranger --choosedir="$tempfile" "$@"
+    if [ -f "$tempfile" ]; then
+        local destdir="$(cat "$tempfile")"
+        rm -f "$tempfile"
+        if [ -n "$destdir" ] && [ "$destdir" != "$PWD" ]; then
+            cd "$destdir"
+        fi
+    fi
+}
+
 # ls after cd
 function cd {
     if [ -z "$1" ]; then
