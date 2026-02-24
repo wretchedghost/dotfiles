@@ -99,6 +99,8 @@ fi
 # Based off of Manjaro. Set color RED for root and a different color for user. Place in both users home dir.
 if [[ ${EUID} == 0 ]]; then
 	PS1='\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;31m\]\w\[\033[00m\]\$ '
+	# Rainbow color
+    #PS1='\[\e[38;5;196m\]\u\[\e[38;5;208m\]@\[\e[38;5;226m\]\h\[\e[38;5;046m\]:\[\e[38;5;033m\]\w\[\e[38;5;093m\]\$\[\e[0m\] '
 else
     PS1='\[\033[01;30m\]\u@\h\[\033[00m\]:\[\033[01;30m\]\w\[\033[00m\]\$ '
 fi
