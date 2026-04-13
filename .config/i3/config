@@ -6,7 +6,7 @@ set $mod mod4
 # Needed for i3-gaps
 for_window [class="^.*"] border pixel 5
 
-default_border normal 2 px
+#default_border normal 2 px
 default_floating_border normal 2 px
 workspace_layout default
 title_align center
@@ -33,7 +33,7 @@ exec --no-startup-id /usr/bin/nm-applet
 exec --no-startup-id /usr/bin/dunst
 exec --no-startup-id /usr/bin/numlockx
 exec --no-startup-id /usr/bin/conky -d -c $HOME/.config/i3/conky/conky-left
-exec --no-startup-id /usr/bin/picom -cbCf
+exec --no-startup-id /usr/bin/picom --config $HOME/.config/picom/picom.conf
 #exec --no-startup-id blueberry-tray
 exec --no-startup-id /usr/bin/xfce4-climpan       # Clipboard
 #exec --no-startup-id sleep 7 && /usr/bin/thunderbird
@@ -61,12 +61,10 @@ exec_always --no-startup-id autotiling -w 1 2 3 6 8 9 -sw .7 -sh .7
 bindsym $mod+minus move scratchpad 
 bindsym $mod+plus scratchpad show
 
-#-------------------------------------------------------------MAIN BINDINGS
+#--------------------------------------------------------------GAPS SECTION
 
 gaps inner 10
 gaps outer 5
-
-#--------------------------------------------------------------GAPS SECTION
 
 bindsym $mod+a focus parent
 bindsym $mod+Shift+space floating toggle
@@ -75,8 +73,8 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "/usr/bin/i3-nagbar -t warning -m 'You pressed the exit shortcut. This will end your X session.' \
     -b 'Yes, exit i3' 'i3-msg exit'"
-bindsym $mod+Shift+Escape	exec --no-startup-id prompt "Exit i3?" \
-    "i3-msg exit"
+#bindsym $mod+Shift+Escape	exec --no-startup-id prompt "Exit i3?" \
+#    "i3-msg exit"
 bindsym $mod+Shift+s sticky toggle
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+F11 fullscreen toggle
@@ -106,27 +104,16 @@ bindsym $mod+F11 exec --no-startup-id /usr/bin/brightnessctl --output DP-3 set -
 # Take a screenshot with scrot
 bindsym $mod+F10 --release exec --no-startup-id /usr/bin/scrot -d 5; exec notify-send 'Taking a screenshot. 5 second timer'
 bindsym $mod+Shift+F10 --release exec --no-startup-id /usr/bin/scrot -d 5 -s; exec notify-send 'Select a window. 5 second timer.'
-bindsym Print exec /usr/bin/scrot -u -s ~/Pictures/%Y%m%d-screenshot.png && notify-send 'Screenshot saved to ~/Pictures/screenshots/$(date +%Y%m%d")-screenshot.png'
+bindsym Print exec /usr/bin/scrot -u -s ~/Pictures/screenshots/$("date +%Y%m%d")-screenshot.png && notify-send 'Screenshot saved to ~/Pictures/screenshots/$("date +%Y%m%d")-screenshot.png'
 
 #bindsym $mod+Return exec --no-startup-id /usr/bin/urxvt 
 bindsym $mod+Return exec --no-startup-id /usr/bin/xfce4-terminal
 #bindsym $mod+Shift+Return exec --no-startup-id /usr/bin/urxvt -name term
 bindsym $mod+Shift+Return exec --no-startup-id /usr/bin/xfce4-terminal -name term
 
-# volume
-#bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks
-#bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
 
-# Granular Volume Control
-#bindsym $mod+XF86AudioRaiseVolume exec amixer -D pulse sset Master 1%+ && pkill -RTMIN+1 i3blocks
-#bindsym $mod+XF86AudioLowerVolume exec amixer -D pulse sset Master 1%- && pkill -RTMIN+1 i3blocks
-
-# Mute
-#bindsym XF86AudioMute exec amixer sset Master toggle && killall -USR1 i3blocks
-
-# Backlight control
-bindsym XF86MonBrightnessUp exec /usr/bin/xbacklight +5 && notify-send "Brightness - $(xbacklight -get | cut -c1-2)%
-bindsym XF86MonBrightnessDown exec /usr/bin/xbacklight -5 && notify-send "Brightness - $(xbacklight -get | cut -c1-2)%
+bindsym XF86MonBrightnessUp exec /usr/bin/xbacklight +5 && notify-send "Brightness - $(xbacklight -get | cut -c1-2)%"
+bindsym XF86MonBrightnessDown exec /usr/bin/xbacklight -5 && notify-send "Brightness - $(xbacklight -get | cut -c1-2)%"
 
 # Caps Indicator 
 bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
@@ -146,7 +133,7 @@ bindsym $mod+Shift+t exec ~/.config/i3/scripts/power-profiles
 bindsym $mod+Shift+g exec ~/.config/i3/scripts/powermenu
 
 # set powersavings for display:
-exec --no-startup-id xset s 480 dpms 600 600 600
+exec --no-startup-id xset s 480 dpms 900 900 900
 
 #-----------------------------------------------------------------FLOATING WINDOWS
 
@@ -164,29 +151,23 @@ for_window [class="Caja"] floating enable move position right
 for_window [class="Nemo"] floating enable move position right
     for_window [class="Thunar"] resize set 820 640
     for_window [class="Nemo"] resize set 900 700 
-    for_window [class="Caja"] resize set  700 
+    for_window [class="Caja"] resize set  820 640 
 for_window [class="org.gnome.Nautilus"] floating enable move position right
     for_window [class="org.gnome.Nautilus"] resize set 900 700 
 for_window [class="Lxappearance"] floating enable stick enable border normal
 for_window [class="Arandr"] floating enable
     for_window [class="Arandr"] resize set 640 480
-for_window [class="RustDesk"] floating enable
-    for_window [class="* - RustDesk"] resize set 640 480
-for_window [class="* - RustDesk"] floating enable
-    for_window [class="RustDesk"] resize set 640 480
 for_window [class="(?i)gsimplecal"] floating enable, move position mouse, move down 28 px
 for_window [title="term"] floating enable move position center
-for_window [class="(?i)wego"] floating enable, move position mouse, move down 28 px
-for_window [title="term"] floating enable move position center
     for_window [title="term"] resize set 900 40
+for_window [class="(?i)wego"] floating enable, move position mouse, move down 28 px
 for_window [title="^WinBox"] floating enable
     for_window [title="^WinBox"] resize set 720 480
 #for_window [class="Yad"] floating enable
 
 # Sticky floating windows. Only takes effect if the windows is floating
 for_window [instance="^URxvt"] sticky enable
-for_window [class="Brave*"] sticky enable
-for_window [class="(?i)firefox*"] sticky enable
+for_window [class="(?i)firefox.*"] sticky enable
 for_window [class="^org.remmina.Remmina"] sticky enable
 for_window [class="Thunar"] sticky enable
 for_window [class="Caja"] sticky enable
@@ -226,15 +207,14 @@ assign [class="(?i)thunderbird"] $ws3
 assign [class="Signal"] $ws4
 assign [class="Steam"] $ws5
 #assign [class="org.remmina.Remmina"] $ws6
-assign [class="Libreoffice-*"] $ws6
+assign [class="Libreoffice-.*"] $ws6
 assign [class="Manuskript"] $ws6
 assign [class="Obsidian"] $ws6
-assign [class="Gimp-*"] $ws7
-assign [class="Spotify*"] $ws8
+assign [class="Gimp-.*"] $ws7
+assign [class="Spotify.*"] $ws8
 assign [class="TeamViewer"] $ws9
-assign [class="RustDesk"] $ws9
 assign [class="Anydesk"] $ws9
-assign [class="com-inductive*"] $ws10
+assign [class="com-inductive.*"] $ws10
 
 #--------------------------------------------------------------------WINDOW FOCUS
 
@@ -253,8 +233,7 @@ bindsym $mod+Shift+j move down 10 px
 bindsym $mod+Shift+k move up 10 px
 bindsym $mod+Shift+l move right 10 px
 
-for_window [class="Brave*"] focus
-for_window [class="(?i)firefox*"] focus
+for_window [class="(?i)firefox.*"] focus
 for_window [class="(?i)firefox"] title_format "<span foreground='red'>%title</span>" 		# print window title of firefox windows red
 #for_window [class="Signal"] focus
 for_window [class="Manuskript"] focus
@@ -330,7 +309,6 @@ bindsym $mod+Shift+p exec --no-startup-id ~/.config/i3/scripts/i3resize.sh right
 #---------------------------------------------------------------------MISC WINDOWS
 
 for_window [window_role="popup"] floating enable
-for_window [class=".*"] border pixel 4
 for_window [class="Links$" title="^Links$"] floating enable
 for_window [title="Event Tester$" id="0x1000001"] floating enable
 
@@ -426,7 +404,6 @@ bar {
 # FOR TESTING
 #bindsym $mod+F12 exec "notify-send Hello, i3"
 #bindsym $mod+F12 exec "notify-send \\"Hello, i3; from $USER\\""
-#!/bin/sh
 
 #-----------------------------------------------------------------ROFI
 
