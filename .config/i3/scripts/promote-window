@@ -19,6 +19,8 @@ i3 = Connection()
 
 for reply in i3.get_workspaces():
     if reply.focused:
-        workspace = i3.get_tree().find_by_id(reply.ipc_data["id"])
+        if workspace:
+            workspace = i3.get_tree().find_by_id(reply.ipc_data["id"])
         master = find_biggest_window(workspace)
-        i3.command("swap container with con_id %s" % master.id)
+        if master:
+            i3.command(f"swap container with con_id {master.id}")

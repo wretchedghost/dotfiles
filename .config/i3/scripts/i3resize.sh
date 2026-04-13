@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 # This script was made by `goferito` on Github.
 # Some cleanup by Luke.
 

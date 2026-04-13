@@ -129,9 +129,6 @@ bindsym $mod+Shift+n exec $HOME/.config/i3/scripts/empty_workspace
 # Power Profile menu switch (rofi)
 bindsym $mod+Shift+t exec ~/.config/i3/scripts/power-profiles
 
-# exit-menu
-bindsym $mod+Shift+g exec ~/.config/i3/scripts/powermenu
-
 # set powersavings for display:
 exec --no-startup-id xset s 480 dpms 900 900 900
 

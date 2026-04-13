@@ -99,7 +99,7 @@ separator=true
 label= 
 command=/usr/bin/echo "`date '+(%a) %b %d'` <b>`date +'%H:%M:%S'`</b> "; [[ -z "${BLOCK_BUTTON}" ]] || gsimplecal &
 interval=1
-#markup=pango
+markup=pango
 #separator=true
 
 [dunst]
@@ -110,7 +110,7 @@ markup=pango
 
 [ppd-status]
 command=~/.config/i3/scripts/ppd-status
-interval=2
+interval=30
 
 [ppd_menu]
 full_text=
@@ -140,7 +140,8 @@ HIDE_WHEN_OFF=1
 [volume-pulse] 
 command=~/.config/i3/i3blocks/volume 
 instance=Master 
-interval=1
+interval=once
+signal=1
 
 #[volume-jackplug] 
 #command=~/.config/i3/i3blocks/volume 

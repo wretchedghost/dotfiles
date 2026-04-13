@@ -26,7 +26,7 @@ try:
         print(str(props['xesam:artist'][0]) + " - " + str(props['xesam:title']))
     else:
         print(props['xesam:artist'][0] + " - " + props['xesam:title']).encode('utf-8')
-    exit
+    exit()
 except dbus.exceptions.DBusException:
-    exit
+    exit()
 

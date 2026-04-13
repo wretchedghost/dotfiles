@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 #
 # Use rofi/zenity to change system runstate thanks to systemd.
 #
