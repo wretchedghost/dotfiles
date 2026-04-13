@@ -111,10 +111,10 @@ bindsym $mod+F10 --release exec --no-startup-id /usr/bin/scrot -d 5; exec notify
 bindsym $mod+Shift+F10 --release exec --no-startup-id /usr/bin/scrot -d 5 -s; exec notify-send 'Select a window. 5 second timer.'
 bindsym Print exec /usr/bin/scrot -u -s ~/Pictures/screenshots/$("date +%Y%m%d")-screenshot.png && notify-send 'Screenshot saved to ~/Pictures/screenshots/$("date +%Y%m%d")-screenshot.png'
 
-#bindsym $mod+Return exec --no-startup-id /usr/bin/urxvt 
-bindsym $mod+Return exec --no-startup-id /usr/bin/xfce4-terminal
-#bindsym $mod+Shift+Return exec --no-startup-id /usr/bin/urxvt -name term
-bindsym $mod+Shift+Return exec --no-startup-id /usr/bin/xfce4-terminal -name term
+bindsym $mod+Return exec --no-startup-id /usr/bin/urxvt 
+#bindsym $mod+Return exec --no-startup-id /usr/bin/xfce4-terminal
+bindsym $mod+Shift+Return exec --no-startup-id /usr/bin/urxvt -name term
+#bindsym $mod+Shift+Return exec --no-startup-id /usr/bin/xfce4-terminal -name term
 
 
 bindsym XF86MonBrightnessUp exec /usr/bin/xbacklight +5 && notify-send "Brightness - $(xbacklight -get | cut -c1-2)%"
