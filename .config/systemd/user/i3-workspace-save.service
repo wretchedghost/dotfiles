@@ -1,0 +1,11 @@
+[Unit]
+Description=Save i3 workspace layout on logout
+Before=graphical-session.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStop=%h/.config/i3/scripts/workspace-save-all.sh
+
+[Install]
+WantedBy=graphical-session.target

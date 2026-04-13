@@ -39,10 +39,13 @@ exec --no-startup-id /usr/bin/xfce4-climpan       # Clipboard
 #exec --no-startup-id sleep 7 && /usr/bin/thunderbird
 exec --no-startup-id /usr/bin/volumeicon 
 exec --no-startup-id /usr/bin/caffeine
-exec --no-startup-id $HOME/.fehbg
+#exec --no-startup-id $HOME/.fehbg
+exec --no-startup-id $HOME/.config/i3/scripts/wallpaper-random.sh
 exec --no-startup-id /usr/bin/redshift
 #exec --no-startup-id sleep 10 && /usr/bin/anydesk
 exec --no-startup-id $HOME/.screenlayout/main.sh
+# restore session. Requires systemd/user ini file
+exec --no-startup-id sleep 3 && ~/.config/i3/scripts/workspace-restore-all.sh
 
 # runs notify-send in critcal mode and stays up for 10 seconds (10000 mili)
 exec /usr/bin/xautolock -detectsleep -time 10 -locker "$HOME/.config/i3/scripts/lock_and_blur.sh" \
@@ -100,6 +103,8 @@ bindsym $mod+Shift+period exec --no-startup-id /usr/bin/autorandr work
 bindsym $mod+F3 exec --no-startup-id /usr/bin/pcmanfm 
 bindsym $mod+F12 exec --no-startup-id /usr/bin/brightnessctl --output DP-3 set +20%
 bindsym $mod+F11 exec --no-startup-id /usr/bin/brightnessctl --output DP-3 set -20%
+# Shows missed notifications
+bindsym $mod+grave exec --no-startup-id dunstctl history-pop
 
 # Take a screenshot with scrot
 bindsym $mod+F10 --release exec --no-startup-id /usr/bin/scrot -d 5; exec notify-send 'Taking a screenshot. 5 second timer'
@@ -124,7 +129,10 @@ bindsym XF86AudioLowerVolume exec amixer -q set Master 5%- unmute
 bindsym XF86AudioMute exec amixer -D pulse set Master 1+ toggle
 
 # Open new empty workspace
-bindsym $mod+Shift+n exec $HOME/.config/i3/scripts/empty_workspace
+bindsym $mod+Tab exec $HOME/.config/i3/scripts/empty_workspace
+
+# Shows current running windows by workspace
+bindsym $mod+Shift+Tab exec rofi -show window
 
 # Power Profile menu switch (rofi)
 bindsym $mod+Shift+t exec ~/.config/i3/scripts/power-profiles

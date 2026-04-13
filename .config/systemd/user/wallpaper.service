@@ -1,0 +1,7 @@
+[Unit]
+Description=Random wallpaper changer
+
+[Service]
+Type=oneshot
+Environment=DISPLAY=:0
+ExecStart=%h/.config/i3/scripts/wallpaper-random.sh

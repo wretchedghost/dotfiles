@@ -114,7 +114,6 @@ Reboot for the system to start lightdm. You might have to chmod +x to /etc/light
 2. cp libreoffice-writer.desktop ~/.local/share/applications/
 
 ## Add touch to click, lrm, and other to touchpad
-
 ```bash
 /etc/X11/xorg.conf.d/90-touchpad.conf
 Section "InputClass"
@@ -127,6 +126,16 @@ Section "InputClass"
 EndSection
 ```
 
+## User systemd wallpaper.timer. Found in ~/.config/systemd/user/
+1. systemctl --user enable --now wallpaper.timer
+
+Change OnUnitActiveSec=30min to whatever interval you want — 1h, 15min, etc.
+
+## User systemd i3-workspace-resurrect. Found in ~/.config/systemd/user/
+1. systemctl --user enable i3-workspace-save.service
+
+ExecStop runs when the service stops, which happens when your graphical session ends — so it saves automatically every time you log out or reboot.
+
 ## My bashrc config
 
 ### A few unique things that I run on my .bashrc are:
@@ -137,3 +146,12 @@ EndSection
 * alias for gitc and gitp found at lines 171 and 172 which make commiting and push way easier.
 * mvg for move and go when changing dirs.
 * Neofetch with custom colors painstakingly found after trying each combo one-by-one.
+
+
+## Newest custom scripts
+1. i3-resurrect
+```bash
+pip install i3-resurrect --break-system-packages
+# or if you use yay
+yay -S i3-resurrect
+```

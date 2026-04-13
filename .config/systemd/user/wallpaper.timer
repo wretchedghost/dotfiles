@@ -1,0 +1,10 @@
+[Unit]
+Description=Change wallpaper on a timer
+
+[Timer]
+OnBootSec=30sec
+OnUnitActiveSec=30min
+Unit=wallpaper.service
+
+[Install]
+WantedBy=timers.target
