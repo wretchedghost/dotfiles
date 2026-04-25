@@ -71,6 +71,13 @@ s() { # do sudo, or sudo the last command if no arguments given
     fi
 }
 
+# Auto-start tmux for interactive SSH sessions
+if [[ -z "$TMUX" ]] && [[ -n "$SSH_TTY" ]] && [[ $- == *i* ]]; then
+    tmux attach-session -t default || tmux new-session -s default
+    exit
+fi
+
+
 # Set variable identifying the chroot you work in (used in the prompt below)
 # I don't think this is needed in an Arch build
 #if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
