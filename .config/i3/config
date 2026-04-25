@@ -109,7 +109,7 @@ bindsym $mod+grave exec --no-startup-id dunstctl history-pop
 # Take a screenshot with scrot
 bindsym $mod+F10 --release exec --no-startup-id /usr/bin/scrot -d 5; exec notify-send 'Taking a screenshot. 5 second timer'
 bindsym $mod+Shift+F10 --release exec --no-startup-id /usr/bin/scrot -d 5 -s; exec notify-send 'Select a window. 5 second timer.'
-bindsym Print exec /usr/bin/scrot -u -s ~/Pictures/screenshots/$("date +%Y%m%d")-screenshot.png && notify-send 'Screenshot saved to ~/Pictures/screenshots/$("date +%Y%m%d")-screenshot.png'
+bindsym Print exec --no-startup-id bash -c 'f=~/Pictures/screenshots/$(date +%Y%m%d)-screenshot.png; scrot -u -s "$f" && notify-send "Screenshot saved to $f"'
 
 bindsym $mod+Return exec --no-startup-id /usr/bin/urxvt 
 #bindsym $mod+Return exec --no-startup-id /usr/bin/xfce4-terminal
