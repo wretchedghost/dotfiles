@@ -43,7 +43,7 @@ exec --no-startup-id /usr/bin/caffeine
 exec --no-startup-id $HOME/.config/i3/scripts/wallpaper-random.sh
 exec --no-startup-id /usr/bin/redshift
 #exec --no-startup-id sleep 10 && /usr/bin/anydesk
-exec --no-startup-id $HOME/.screenlayout/main.sh
+exec --no-startup-id $HOME/.screenlayout/monitor.sh
 # restore session. Requires systemd/user ini file
 exec --no-startup-id sleep 3 && ~/.config/i3/scripts/workspace-restore-all.sh
 
