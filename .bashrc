@@ -71,13 +71,6 @@ s() { # do sudo, or sudo the last command if no arguments given
     fi
 }
 
-# Auto-start tmux for interactive SSH sessions
-if [[ -z "$TMUX" ]] && [[ -n "$SSH_TTY" ]] && [[ $- == *i* ]]; then
-    tmux attach-session -t default || tmux new-session -s default
-    exit
-fi
-
-
 # Set variable identifying the chroot you work in (used in the prompt below)
 # I don't think this is needed in an Arch build
 #if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
@@ -103,13 +96,11 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-# Based off of Manjaro. Set color RED for root and a different color for user. Place in both users home dir.
+# NEW!!! Based off of Manjaro. Set color RED for root and a different color for user
 if [[ ${EUID} == 0 ]]; then
 	PS1='\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;31m\]\w\[\033[00m\]\$ '
-	# Rainbow color
-    #PS1='\[\e[38;5;196m\]\u\[\e[38;5;208m\]@\[\e[38;5;226m\]\h\[\e[38;5;046m\]:\[\e[38;5;033m\]\w\[\e[38;5;093m\]\$\[\e[0m\] '
 else
-    PS1='\[\033[01;30m\]\u@\h\[\033[00m\]:\[\033[01;30m\]\w\[\033[00m\]\$ '
+    PS1='\[\033[01;35m\]\u@\h\[\033[00m\]:\[\033[01;35m\]\w\[\033[00m\]\$ '
 fi
 
 unset color_prompt force_color_prompt
@@ -179,8 +170,9 @@ alias xit="exit"
 # Alias for Git committing and pushing. gitsync pulls all git in current folder
 alias gitc="git add . && git commit -m" # + commit message
 alias gitp="git push" # + remote & branch names
+alias gitr='git add . && git commit -m "new commit" && git push' # add, commit, and push
 alias gitsync="ls | xargs -P10 -I{} git -C {} pull"
-alias gitr='git add . && git commit -m "new commit" && git push' # add, commit, and push alias
+alias gitr='git add . && git commit -m "new commit" && git push' # add, commit, and push alias 
 
 # Changes dir color in terminal or tty (30:black, 31:red, 32:green, 33:yellow, 34:blue, 35:purple, 36:cyan, 37:white)
 # Use di=1;4;33 to make directories (1) bold, (4) underlined, and (33) yellow
@@ -196,14 +188,8 @@ mvg ()
     fi
 }
 
-# Add $HOME/bin to path
 export PATH=/home/waynes/bin:$PATH
 
-#screenfetch
-#neofetch --colors 129 7 129 129 7 7 --ascii_colors 129 129 --ascii_distro arch --color_blocks off
-fastfetch
-
-# Powerline
 if [ -f /usr/share/powerline/bindings/bash/powerline.sh ]; then
   powerline-daemon -q
   POWERLINE_BASH_CONTINUATION=1
@@ -211,31 +197,12 @@ if [ -f /usr/share/powerline/bindings/bash/powerline.sh ]; then
   source /usr/share/powerline/bindings/bash/powerline.sh
 fi
 
-# Ranger shell function wrapper
-ranger() {
-    local tempfile="$(mktemp -t tmp.XXXXXX)"
-    command ranger --choosedir="$tempfile" "$@"
-    if [ -f "$tempfile" ]; then
-        local destdir="$(cat "$tempfile")"
-        rm -f "$tempfile"
-        if [ -n "$destdir" ] && [ "$destdir" != "$PWD" ]; then
-            cd "$destdir"
-        fi
-    fi
-}
+# Auto-start tmux for interactive SSH sessions 
+if [[ -z "$TMUX" ]] && [[ -n "$SSH_TTY" ]] && [[ $- == *i* ]]; then     
+    tmux attach-session -t default || tmux new-session -s default     
+    exit 
+fi
 
-# ls after cd
-function cd {
-    if [ -z "$1" ]; then
-        builtin cd
-    else
-        builtin cd "$1"
-    fi
-    if [ $? -eq 0 ]; then
-        ls
-    fi
-}
-
-
-# Enable for GUI.
 #xset b off
+
+fastfetch
