@@ -92,6 +92,7 @@ bindsym $mod+q split toggle; exec /usr/bin/notify-send 'tile toggle'
 
 #bindsym $mod+d exec --no-startup-id /usr/bin/rofi -show drun
 bindsym $mod+f exec --no-startup-id /usr/bin/firefox
+bindsym $mod+g exec --no-startup-id /usr/bin/galculator
 bindsym $mod+i exec --no-startup-id /usr/bin/urxvt -e /usr/bin/htop 
 bindsym $mod+m exec --no-startup-id /usr/bin/wine ~/Downloads/winbox64.exe -name WinBox
 bindsym $mod+n exec --no-startup-id /bin/bash ~/bin/visionclientlauncher/app/visionclientlauncher.sh
