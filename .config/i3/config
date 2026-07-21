@@ -99,8 +99,6 @@ bindsym $mod+n exec --no-startup-id /bin/bash ~/bin/visionclientlauncher/app/vis
 bindsym $mod+b exec --no-startup-id /bin/bash ~/bin/designerlauncher/app/designerlauncher.sh
 bindsym $mod+p exec --no-startup-id $HOME/.config/i3/scripts/promote-window
 bindsym $mod+x exec --no-startup-id $HOME/.config/i3/scripts/lock_and_blur.sh
-bindsym $mod+Shift+comma exec --no-startup-id /usr/bin/autorandr mobile 
-bindsym $mod+Shift+period exec --no-startup-id /usr/bin/autorandr work
 bindsym $mod+F3 exec --no-startup-id /usr/bin/pcmanfm 
 bindsym $mod+F12 exec --no-startup-id /usr/bin/brightnessctl s 10%+
 bindsym $mod+F11 exec --no-startup-id /usr/bin/brightnessctl s 10%-
